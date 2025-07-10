@@ -105,7 +105,7 @@ namespace Buttplug.Client
                     {
                         var msgContent = System.Text.Encoding.Default.GetString(buff, 0, incomingMsg.Count);
                         ReceiveMessages(msgContent);
-                     }
+                    }
                 }
             }
             catch (Exception e)
