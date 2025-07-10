@@ -117,8 +117,11 @@ namespace Buttplug.Client
             {
                 if (_wsClient != null)
                 {
-                    // Clean up the websocket and fire the disconnection event.
-                    _wsClient.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", token).Dispose();
+                    // Clean up the websocket, fire the disconnection event.
+                    await _wsClient.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", token);
+
+                    // Wait for close to complete to prevent uncaught exception.
+                    _wsClient?.Dispose();
                     _wsClient = null;
                 }
                 // If we somehow still have some live messages, throw exceptions so they aren't stuck.
